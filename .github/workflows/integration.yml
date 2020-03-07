@@ -8,6 +8,8 @@ on:
 
 jobs:
   magellan:
+    env:
+      CI: true
     strategy:
       matrix:
         node: [1, 2, 3]
@@ -15,9 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: bahmutov/npm-install@v1
-      - run: npm run magellan -- --bucket=${{ matrix.node }}/3 --max_workers=2 --max_test_attempts=1
+      - run: npm run magellan -- --bucket=${{ matrix.node }}/3 --serial --max_test_attempts=1
 
   cypress:
+    env:
+      CI: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
