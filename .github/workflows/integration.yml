@@ -12,7 +12,7 @@ jobs:
       CI: true
     strategy:
       matrix:
-        node: [1]
+        node: [1, 2, 3]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
