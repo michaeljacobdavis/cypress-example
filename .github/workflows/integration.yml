@@ -12,15 +12,14 @@ jobs:
       CI: true
     strategy:
       matrix:
-        node:
-          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+        node: [1, 2, 3]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: bahmutov/npm-install@v1
-      - run: npm run cypress:verify
-      - run: npm run magellan -- --bucket=${{ matrix.node }}/19 --serial --max_test_attempts=1
-  # cypress:
+      - run: xvfb-run --auto-servernum npm run cypress:verify
+      - run: npm run magellan -- --bucket=${{ matrix.node }}/3 --max_workers=2 --max_test_attempts=1
+      - uses: bcomnes/cleanup-xvfb@v1
   #   env:
   #     CI: true
   #   runs-on: ubuntu-latest
