@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: bahmutov/npm-install@v1
-      - run: npm run magellan -- --buckets=${{ matrix.node }}/3 --max_workers=2
+      - run: npm run magellan -- --bucket=${{ matrix.node }}/3 --max_workers=2
 
   cypress:
     runs-on: ubuntu-latest
