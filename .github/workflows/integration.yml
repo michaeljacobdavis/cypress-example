@@ -18,8 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: bahmutov/npm-install@v1
-      - run: npm run cypress:verify
       - run: Xvfb :99 &
+      - run: npm run cypress:verify
       - run: npm run magellan -- --bucket=${{ matrix.node }}/3 --max_workers=3 --max_test_attempts=1
       - run: pkill Xvfb
   # cypress:
