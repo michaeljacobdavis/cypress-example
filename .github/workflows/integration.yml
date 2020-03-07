@@ -10,6 +10,7 @@ jobs:
   magellan:
     env:
       CI: true
+      DISPLAY: :99
     strategy:
       matrix:
         node: [1, 2, 3]
@@ -19,15 +20,14 @@ jobs:
       - uses: bahmutov/npm-install@v1
       - run: npm run cypress:verify
       - run: Xvfb :99 &
-      - run: DISPLAY=:99 npm run magellan -- --bucket=${{ matrix.node }}/3 --max_workers=3 --max_test_attempts=1
+      - run: npm run magellan -- --bucket=${{ matrix.node }}/3 --max_workers=3 --max_test_attempts=1
       - run: pkill Xvfb
-
-  cypress:
-    env:
-      CI: true
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: bahmutov/npm-install@v1
-      - run: npm run cypress:verify
-      - run: npm run cypress
+  # cypress:
+  #   env:
+  #     CI: true
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: bahmutov/npm-install@v1
+  #     - run: npm run cypress:verify
+  #     - run: npm run cypress
