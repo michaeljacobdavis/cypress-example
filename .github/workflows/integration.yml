@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: bahmutov/npm-install@v1
       - run: npm run cypress:verify
-      - run: npm run magellan -- --bucket=${{ matrix.node }}/6 --serial --max_test_attempts=1
+      - run: npm run magellan -- --bucket=${{ matrix.node }}/19 --serial --max_test_attempts=1
   # cypress:
   #   env:
   #     CI: true
