@@ -5,21 +5,24 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   magellan:
+    strategy:
+      matrix:
+        node: [1, 2, 3]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: npm ci
-    - run: npm run magellan
-      
+      - uses: actions/checkout@v2
+      - uses: bahmutov/npm-install@v1
+      - run: npm run magellan -- --buckets=${{ matrix.node }}/3 --max_workers=2
+
   cypress:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: npm ci
-    - run: npm run cypress
+      - uses: actions/checkout@v2
+      - uses: bahmutov/npm-install@v1
+      - run: npm run cypress
